@@ -63,7 +63,7 @@ app.post("/posts", (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render("/posts/add", {
+        res.render("posts/add", {
             errors: errors,
             title: req.body.title,
             body: req.body.postBody

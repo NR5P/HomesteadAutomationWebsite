@@ -1,14 +1,20 @@
+{{#each errors}}
+    <div class="alert">{{text}}</div>
+{{else}}
+
+{{/each}}
+
 <form action="/posts" method="post">
     <h3>New Post</h3>
 
     <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" name="title" required>
+        <input type="text" name="title" required> 
     </div>
 
     <div class="form-group">
         <label for="postBody">Body</label>
-        <textarea name="postBody" required></textarea>
+        <textarea name="postBody"></textarea required> 
     </div>
 
     <button type="submit" class="button-submit">Add Post</button>
