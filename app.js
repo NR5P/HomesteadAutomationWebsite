@@ -19,8 +19,8 @@ mongoose.connect("mongodb://localhost/homestead-web-app", {
 // load models
 require("./models/BlogPost");
 require("./models/User");
-const blogPost = mongoose.model("blogPosts");
-const users = mongoose.model("users");
+const BlogPost = mongoose.model("blogPosts");
+const User = mongoose.model("users");
 //////////////end database connection//////////////////////////
 
 
@@ -39,9 +39,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
     const title = "Homestead Automation";
-    res.render("index", {
-        title: title
-    });
+    BlogPost.find({})
+        .sort({date:"desc"})
+        .then(posts => {
+            res.render("index", {
+                title: title,
+                posts: posts
+            });
+        });
 });
 
 // add a post
@@ -69,7 +74,15 @@ app.post("/posts", (req, res) => {
             body: req.body.postBody
         });
     } else {
-        res.send("passed");
+        const newPost = {
+            title: req.body.title,
+            post: req.body.postBody
+        }
+        new BlogPost(newPost)
+            .save()
+            .then(post => {
+                res.redirect("/");
+            });
     }
 });
 
