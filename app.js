@@ -57,6 +57,20 @@ app.get("/posts/add", (req, res) => {
     });
 });
 
+// edit a post
+app.get("/posts/edit/:id", (req, res) => {
+    const title = "Homestead Automation-Edit Post";
+    BlogPost.findOne({
+        _id: req.params.id
+    })
+    .then(post => {
+        res.render("posts/edit", {
+            post:post
+        });
+    })
+});
+
+
 // process new post form
 app.post("/posts", (req, res) => {
     let errors = [];
