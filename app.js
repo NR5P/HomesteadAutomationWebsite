@@ -60,7 +60,7 @@ app.get("/posts/add", (req, res) => {
 // process new post form
 app.post("/posts", (req, res) => {
     let errors = [];
-    if (!req.body.title) {
+    if (!req.body.postTitle) {
         errors.push({text: "Please add a title"}); 
     }
     if (!req.body.postBody) {
@@ -70,13 +70,13 @@ app.post("/posts", (req, res) => {
     if (errors.length > 0) {
         res.render("posts/add", {
             errors: errors,
-            title: req.body.title,
-            body: req.body.postBody
+            postTitle: req.body.postTitle,
+            postBody: req.body.postBody
         });
     } else {
         const newPost = {
-            title: req.body.title,
-            post: req.body.postBody
+            postTitle: req.body.postTitle,
+            postBody: req.body.postBody
         }
         new BlogPost(newPost)
             .save()

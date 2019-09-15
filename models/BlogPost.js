@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BlogSchema = new Schema({
-    title: {
+    postTitle: {
         type: String,
         required: true
     },
-    post: {
+    postBody: {
         type: String,
         required: true
     },
