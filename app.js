@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const methodOverride = require("method-override");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -33,6 +34,10 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 ///end body parser middleware//////////////////////////
+
+// method override middleware
+app.use(methodOverride("_method"));
+//end method override middlewar//////////////////////////
 
 // public static folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -98,6 +103,23 @@ app.post("/posts", (req, res) => {
                 res.redirect("/");
             });
     }
+});
+
+// edit form process
+app.put("/posts/:id", (req,res) => {
+    BlogPost.findOne({
+        _id: req.params.id
+    })
+    .then(post => {
+        // new values
+        post.postTitle = req.body.postTitle;
+        post.postBody = req.body.postBody;
+
+        post.save()
+            .then(post => {
+                res.redirect("/");
+            })
+    });
 });
 
 app.get("/about", (req, res) => {
