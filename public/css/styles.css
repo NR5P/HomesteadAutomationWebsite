@@ -145,6 +145,35 @@ form textarea {
     transition: .3s;
 }
 
+.btn-delete {
+    background-color:  #ff4d4d;
+    border: none;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height: 48px;
+    width: 100px;
+}
+
+.btn-add {
+    background-color: #4d79ff;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+}
+
+
+#delete-btn-form {
+    display: inline-block;
+}
+
 /***************************end blog post*********************************************************/
 
 /**********************media queries**************************************************/

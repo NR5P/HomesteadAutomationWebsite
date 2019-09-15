@@ -6,7 +6,15 @@
             <p>{{postBody}}</p>
         </div>
         <a class="btn-edit" href="/posts/edit/{{id}}">Edit</a>
+
+        <!-- delete post -->
+        <form method="POST" id="delete-btn-form" action="/posts/{{id}}?_method=DELETE">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" class="btn-delete" value="Delete">
+        </form>
     </div>
 {{else}}
     <h2>No Posts</h2>
 {{/each}}
+
+<a href="/posts/add" class="btn-add">Add Post</a>

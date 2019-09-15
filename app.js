@@ -122,6 +122,16 @@ app.put("/posts/:id", (req,res) => {
     });
 });
 
+// delete post
+app.delete("/posts/:id", (req,res) => {
+    BlogPost.remove({
+        _id: req.params.id
+    })
+    .then(() => {
+        res.redirect("/");
+    });
+});
+
 app.get("/about", (req, res) => {
     const title = "About Homestead Automation"
     res.render("about", {
