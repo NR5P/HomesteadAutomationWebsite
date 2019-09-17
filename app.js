@@ -1,6 +1,8 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
+const session = require("express-session");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -38,6 +40,27 @@ app.use(bodyParser.json());
 // method override middleware
 app.use(methodOverride("_method"));
 //end method override middlewar//////////////////////////
+
+// express session middleware//////////////////////////
+app.use(session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+}));
+///end express session middleware/////////////////////
+
+///connect flash middleware//////////////////////////
+app.use(flash());
+///end connect flash middleware//////////////////////////
+
+//global variables//////////////////////////////////////
+app.use(function(req,res,next){
+    res.locals.success_msg = req.flash("success_msg");
+    res.locals.error_msg = req.flash("error_msg");
+    res.locals.error = req.flash("error");
+    next();
+})
+//end global variables//////////////////////////////////////
 
 // public static folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -100,6 +123,7 @@ app.post("/posts", (req, res) => {
         new BlogPost(newPost)
             .save()
             .then(post => {
+                req.flash("success_msg", "post added");
                 res.redirect("/");
             });
     }
@@ -117,6 +141,7 @@ app.put("/posts/:id", (req,res) => {
 
         post.save()
             .then(post => {
+                req.flash("success_msg", "post updated");
                 res.redirect("/");
             })
     });
@@ -128,6 +153,7 @@ app.delete("/posts/:id", (req,res) => {
         _id: req.params.id
     })
     .then(() => {
+        req.flash("success_msg", "post removed");
         res.redirect("/");
     });
 });

@@ -1,0 +1,23 @@
+{{#each errors}}
+    <div class="alert">{{text}}</div>
+{{else}}
+
+{{/each}}
+
+<h3>Edit Post</h3>
+
+<form action="/posts/{{post.id}}?_method=PUT" method="post">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="form-group">
+        <label for="postTitle">Title</label>
+        <input type="text" name="postTitle" value="{{post.postTitle}}" required> 
+    </div>
+
+    <div class="form-group">
+        <label for="postBody">Body</label>
+        <textarea name="postBody" required>{{post.postBody}}</textarea> 
+    </div>
+
+    <button type="submit" class="button-submit">Edit Post</button>
+
+</form>

@@ -91,7 +91,7 @@ form textarea {
 
 /***************************errors**************************************************************/
 
-.alert {
+.alert-danger {
     padding: 20px;
     background-color: #f44336; /* Red */
     color: white;
@@ -99,6 +99,13 @@ form textarea {
     text-align: center;
 }
 
+.alert-success {
+    padding: 20px;
+    background-color: ##33ff33;
+    color: white;
+    margin: 15px;
+    text-align: center;
+}
 /***************************end errors***********************************************************/
 
 /***************************blog post************************************************************/
