@@ -20,6 +20,8 @@ const BlogPost = mongoose.model("blogPosts");
 
 //load routes
 const blog = require("./routes/blog");
+const users = require("./routes/users");
+const admin = require("./routes/admin");
 
 
 //Database connection/////////////////////////////////////////
@@ -85,27 +87,11 @@ app.get("/", (req, res) => {
         });
 });
 
-app.get("/contact", (req, res) => {
-    title = "Contact Homestead Automation";
-    res.render("contact", {
-        title:title
-    });
-});
-
-// login
-app.get("/login", (req,res) => {
-    res.send("login");
-});
-
-app.get("/about", (req, res) => {
-    const title = "About Homestead Automation"
-    res.render("about", {
-        title:title
-    });
-});
 
 // User routes
-app.use("/posts/", blog);
+app.use("/posts", blog);
+app.use("/", users);
+app.use("/", admin);
 
 // if port not specified on server than use 5000
 const PORT = process.env.PORT || 5000;
