@@ -9,6 +9,18 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+// public static folder
+app.use(express.static(path.join(__dirname, "public")));
+
+
+// load model
+require("./models/BlogPost");
+const BlogPost = mongoose.model("blogPosts");
+
+
+//load routes
+const blog = require("./routes/blog");
+
 
 //Database connection/////////////////////////////////////////
 mongoose.connect("mongodb://localhost/homestead-web-app", {
@@ -20,9 +32,7 @@ mongoose.connect("mongodb://localhost/homestead-web-app", {
 .catch(err => console.log(err));
 
 // load models
-require("./models/BlogPost");
 require("./models/User");
-const BlogPost = mongoose.model("blogPosts");
 const User = mongoose.model("users");
 //////////////end database connection//////////////////////////
 
@@ -62,8 +72,6 @@ app.use(function(req,res,next){
 })
 //end global variables//////////////////////////////////////
 
-// public static folder
-app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
     const title = "Homestead Automation";
@@ -77,85 +85,16 @@ app.get("/", (req, res) => {
         });
 });
 
-// add a post
-app.get("/posts/add", (req, res) => {
-    const title = "Homestead Automation-Add Post";
-    res.render("posts/add", {
+app.get("/contact", (req, res) => {
+    title = "Contact Homestead Automation";
+    res.render("contact", {
         title:title
     });
 });
 
-// edit a post
-app.get("/posts/edit/:id", (req, res) => {
-    const title = "Homestead Automation-Edit Post";
-    BlogPost.findOne({
-        _id: req.params.id
-    })
-    .then(post => {
-        res.render("posts/edit", {
-            post:post
-        });
-    })
-});
-
-
-// process new post form
-app.post("/posts", (req, res) => {
-    let errors = [];
-    if (!req.body.postTitle) {
-        errors.push({text: "Please add a title"}); 
-    }
-    if (!req.body.postBody) {
-        errors.push({text: "Please add a post body"}); 
-    }
-
-    if (errors.length > 0) {
-        res.render("posts/add", {
-            errors: errors,
-            postTitle: req.body.postTitle,
-            postBody: req.body.postBody
-        });
-    } else {
-        const newPost = {
-            postTitle: req.body.postTitle,
-            postBody: req.body.postBody
-        }
-        new BlogPost(newPost)
-            .save()
-            .then(post => {
-                req.flash("success_msg", "post added");
-                res.redirect("/");
-            });
-    }
-});
-
-// edit form process
-app.put("/posts/:id", (req,res) => {
-    BlogPost.findOne({
-        _id: req.params.id
-    })
-    .then(post => {
-        // new values
-        post.postTitle = req.body.postTitle;
-        post.postBody = req.body.postBody;
-
-        post.save()
-            .then(post => {
-                req.flash("success_msg", "post updated");
-                res.redirect("/");
-            })
-    });
-});
-
-// delete post
-app.delete("/posts/:id", (req,res) => {
-    BlogPost.remove({
-        _id: req.params.id
-    })
-    .then(() => {
-        req.flash("success_msg", "post removed");
-        res.redirect("/");
-    });
+// login
+app.get("/login", (req,res) => {
+    res.send("login");
 });
 
 app.get("/about", (req, res) => {
@@ -165,12 +104,8 @@ app.get("/about", (req, res) => {
     });
 });
 
-app.get("/contact", (req, res) => {
-    title = "Contact Homestead Automation";
-    res.render("contact", {
-        title:title
-    });
-});
+// User routes
+app.use("/posts/", blog);
 
 // if port not specified on server than use 5000
 const PORT = process.env.PORT || 5000;
