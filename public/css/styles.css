@@ -197,6 +197,12 @@ form textarea {
 /***************************end blog post*********************************************************/
 
 /**********************media queries**************************************************/
+@media screen and (max-width: 1600px) {
+    nav ul {
+        width: 50%;
+    }
+}
+
 @media screen and (max-width: 1024px) {
     nav ul {
         width: 50%;
