@@ -5,6 +5,7 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const path = require("path");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 const mongoose = require("mongoose");
 
 const app = express();
@@ -22,6 +23,9 @@ const BlogPost = mongoose.model("blogPosts");
 const blog = require("./routes/blog");
 const users = require("./routes/users");
 const admin = require("./routes/admin");
+
+// Passport config
+require("./config/passport")(passport);
 
 
 //Database connection/////////////////////////////////////////
