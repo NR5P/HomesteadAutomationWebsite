@@ -10,6 +10,20 @@ const BlogSchema = new Schema({
         type: String,
         required: true
     },
+    comments: [
+        {
+            title: String
+        },
+        { 
+            body: String
+        },
+        {
+            author: mongoose.Schema.Types.ObjectId
+        },
+        {
+            date: Date
+        }
+    ],
     date: {
         type: Date,
         default: Date.now

@@ -5,11 +5,15 @@
             <h3>{{postTitle}}</h3>
             <p>{{postBody}}</p>
         </div>
-        <button onclick="window.location.href = '/posts/edit/{{id}}';" class="btn-edit">Edit</button>
+        {{#if ../user}}
+            <button onclick="window.location.href = '/posts/edit/{{id}}';" class="btn-edit">Edit</button>
+        {{/if}}
         <!-- delete post -->
         <form method="POST" id="delete-btn-form" action="/posts/{{id}}?_method=DELETE">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn-delete">Delete</button>
+            {{#if ../user}}
+                <button type="submit" class="btn-delete">Delete</button>
+            {{/if}}
         </form>
     </div>
 {{else}}

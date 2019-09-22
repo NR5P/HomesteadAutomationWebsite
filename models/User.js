@@ -14,6 +14,20 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    contact: [
+        {
+            city: String
+        },
+        {
+            state: String
+        },
+        {
+            zip: String
+        },
+        {
+            phoneNumber: String
+        }
+    ],
     dateJoined: {
         type: Date,
         default: Date.now

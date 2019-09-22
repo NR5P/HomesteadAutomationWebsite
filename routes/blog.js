@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
+const {ensureAuthenticated} = require("../helpers/auth");
 
 
 // load model
@@ -11,7 +12,7 @@ const BlogPost = mongoose.model("blogPosts");
 
 
 // add a post
-router.get("/add", (req, res) => {
+router.get("/add", ensureAuthenticated, (req, res) => {
     const title = "Homestead Automation-Add Post";
     res.render("posts/add", {
         title:title
@@ -19,7 +20,7 @@ router.get("/add", (req, res) => {
 });
 
 // edit a post
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", ensureAuthenticated, (req, res) => {
     const title = "Homestead Automation-Edit Post";
     BlogPost.findOne({
         _id: req.params.id
@@ -63,7 +64,7 @@ router.post("/", (req, res) => {
 });
 
 // edit form process
-router.put("/:id", (req,res) => {
+router.put("/:id", ensureAuthenticated, (req,res) => {
     BlogPost.findOne({
         _id: req.params.id
     })
@@ -81,7 +82,7 @@ router.put("/:id", (req,res) => {
 });
 
 // delete post
-router.delete("/:id", (req,res) => {
+router.delete("/:id", ensureAuthenticated, (req,res) => {
     BlogPost.remove({
         _id: req.params.id
     })
