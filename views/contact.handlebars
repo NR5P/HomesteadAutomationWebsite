@@ -1,0 +1,20 @@
+<h3>Contact</h3>
+
+<!--TODO: need to finish this contact info form and find how to send an email-->
+<form action="/posts/{{post.id}}?_method=PUT" method="post">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="form-group">
+        <label for="postTitle">Title</label>
+        <input type="text" name="postTitle" value="{{post.postTitle}}" required> 
+    </div>
+
+    <div class="form-group">
+        <label for="postBody">Body</label>
+        <textarea name="postBody" required>{{post.postBody}}</textarea> 
+    </div>
+
+    <button type="submit" class="button-submit">Edit Post</button>
+
+</form>
+
+

@@ -31,6 +31,10 @@ const UserSchema = new Schema({
     dateJoined: {
         type: Date,
         default: Date.now
+    },
+    admin: {
+        type: Boolean,
+        default: false
     }
 });
 
