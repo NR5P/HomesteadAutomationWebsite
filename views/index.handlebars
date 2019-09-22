@@ -16,4 +16,6 @@
     <h2>No Posts</h2>
 {{/each}}
 
-<a href="/posts/add" class="btn-add">Add Post</a>
+{{#if user}}
+    <a href="/posts/add" class="btn-add">Add Post</a>
+{{/if}}
