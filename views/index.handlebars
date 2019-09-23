@@ -1,8 +1,8 @@
 {{#each posts}}
     <div class="card">
-        <img src="images/homestead-automation-logo.svg" alt="">
+        <a href="/posts/view/{{id}}"><img src="images/homestead-automation-logo.svg" alt="blog post image"></a>
         <div class="container">
-            <h3>{{postTitle}}</h3>
+            <h1>{{postTitle}}</h1>
             <p>{{postBody}}</p>
         </div>
         {{#if ../user}}

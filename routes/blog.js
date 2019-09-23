@@ -8,7 +8,19 @@ const {ensureAuthenticated} = require("../helpers/auth");
 require("../models/BlogPost");
 const BlogPost = mongoose.model("blogPosts");
 
-
+// view individual post TODO: working on now
+router.get("/view/:id", (req,res) => {
+    BlogPost.findOne({
+        _id: req.params.id
+    })
+    .then(post => {
+        const title = post.postTitle;
+        res.render("posts/postView", {
+            post: post,
+            title: title
+        });
+    });
+});
 
 
 // add a post
@@ -27,9 +39,10 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
     })
     .then(post => {
         res.render("posts/edit", {
+            title: title,
             post:post
         });
-    })
+    });
 });
 
 

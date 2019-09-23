@@ -139,7 +139,7 @@ form textarea {
 .container p {
     font-family: 'Source Sans Pro', sans-serif;
 }
-.container h3 {
+.container h3, .container h2, .container h1 {
     font-family: 'Source Sans Pro', sans-serif;
     font-family: 'Cinzel', serif;
 }
