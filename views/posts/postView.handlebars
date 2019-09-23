@@ -1,0 +1,37 @@
+<div class="card">
+    <img src="/images/homestead-automation-logo.svg" alt="blog post image">
+    <div class="container">
+        <h1>{{post.postTitle}}</h1>
+        <p>{{post.postBody}}</p>
+    </div>
+    {{#if user}}
+        <button onclick="window.location.href = '/posts/edit/{{id}}';" class="btn-edit">Edit</button>
+    {{/if}}
+    <!-- delete post -->
+    <form method="POST" id="delete-btn-form" action="/posts/{{id}}?_method=DELETE">
+        <input type="hidden" name="_method" value="DELETE">
+        {{#if user}}
+            <button type="submit" class="btn-delete">Delete</button>
+        {{/if}}
+    </form>
+</div>
+
+<div class="card">
+    <div class="container">
+        <h2>{{#if user.comments}}Comments{{else}}No Comments{{/if}}</h2>
+    </div>
+</div>
+
+{{#each user.comments}}
+    <div class="card">
+        <div class="container">
+            <p>{{author}}</p>
+            <p>{{body}}</p>
+        </div>
+    </div>
+{{/each}}
+
+{{#if user}}
+    <a href="/posts/add" class="btn-add">Add Comment</a>
+    <!-- add javascript here to drop down comment box when clicked to add commeent TODO:-->
+{{/if}}
