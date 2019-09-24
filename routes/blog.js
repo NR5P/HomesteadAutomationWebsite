@@ -31,6 +31,11 @@ router.get("/add", ensureAuthenticated, (req, res) => {
     });
 });
 
+// add a comment to a post
+router.get("/comment/:id", ensureAuthenticated, (req, res) => {
+    //TODO: check or no comment and add flash message if not
+})
+
 // edit a post
 router.get("/edit/:id", ensureAuthenticated, (req, res) => {
     const title = "Homestead Automation-Edit Post";

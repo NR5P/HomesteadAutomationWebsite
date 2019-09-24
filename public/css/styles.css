@@ -117,6 +117,10 @@ form textarea {
 .form-group input {
     display: block;
 }
+
+#comment-text-add {
+    width: 100%;
+}
 /******************************end form**************************************************************/
 
 

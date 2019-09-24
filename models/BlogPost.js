@@ -18,7 +18,10 @@ const BlogSchema = new Schema({
             author: mongoose.Schema.Types.ObjectId
         },
         {
-            date: Date
+            date: {
+                type: Date,
+                default: Date.now
+            }
         }
     ],
     date: {
