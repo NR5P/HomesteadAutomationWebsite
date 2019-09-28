@@ -4,9 +4,10 @@ const router = express.Router();
 const {ensureAuthenticated} = require("../helpers/auth");
 
 
-// load model
+// load models
 require("../models/BlogPost");
 const BlogPost = mongoose.model("blogPosts");
+const Comments = mongoose.model("comments");
 
 // view individual post TODO: working on now
 router.get("/view/:id", (req,res) => {
@@ -31,10 +32,55 @@ router.get("/add", ensureAuthenticated, (req, res) => {
     });
 });
 
-// add a comment to a post
-router.get("/comment/:id", ensureAuthenticated, (req, res) => {
-    //TODO: check or no comment and add flash message if not
+/*
+// retrieve comments from a post //TODO:1
+router.get("/comments/:id", ensureAuthenticated, (req, res) => {
+    BlogPost.findOne({
+        _id: req.params.id
+    })
+    .then(post => {
+        res.json(post.comments);
+    });
+});
+
+// add a comment to a post TODO: on this
+router.post("/comment/:id", ensureAuthenticated, (req, res) => {
+    let errors = [];
+    if (!req.body.commentBody) {
+        errors.push({text: "Please add a comment"}); 
+    }
+    BlogPost.findOne({
+        _id: req.params.id
+    })
+    .then(post => {
+        const newComment = {
+            commentBody = req.params.commentBody,
+            commentAuthor = req.params.author
+        }
+        post.comments.push(newComment)
+            .then(() =>{
+                res.send(newComment);
+            });
+    });
+});
+
+// modify a comment //TODO:
+router.put("/comment/:id", ensureAuthenticated, (req, res) => {
+
 })
+
+// delete a comment TODO:
+router.delete("/comment/postid:/commentid:")
+    BlogPost.findOne({
+        _id: req.params.postid
+    })
+    .then(post => {
+        post.children.id(req.params.commentid).remove();
+    })
+    .then(response => {
+        res.json(response);
+    })
+*/
 
 // edit a post
 router.get("/edit/:id", ensureAuthenticated, (req, res) => {

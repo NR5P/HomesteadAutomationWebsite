@@ -1,6 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const CommentSchema = new Schema({
+    commentBody: {
+        type: String,
+        required: true
+    },
+    author: mongoose.Schema.Types.ObjectId,
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
 const BlogSchema = new Schema({
     postTitle: {
         type: String,
@@ -10,24 +22,12 @@ const BlogSchema = new Schema({
         type: String,
         required: true
     },
-    comments: [
-        { 
-            body: String
-        },
-        {
-            author: mongoose.Schema.Types.ObjectId
-        },
-        {
-            date: {
-                type: Date,
-                default: Date.now
-            }
-        }
-    ],
+    comments: [CommentSchema],
     date: {
         type: Date,
         default: Date.now
     }
 });
 
+mongoose.model("comments", CommentSchema);
 mongoose.model("blogPosts", BlogSchema);
