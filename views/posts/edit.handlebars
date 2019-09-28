@@ -6,10 +6,12 @@
         <label for="postTitle">Title</label>
         <input type="text" name="postTitle" value="{{post.postTitle}}" required> 
     </div>
-</form>
+
     <div class="form-group">
         <label for="postBody">Body</label>
-        <textarea name="commentBody" id="commentBody" required>{{post.postBody}}</textarea> 
-
-        <button type="submit" id="comment-submit">Edit Post</button>
+        <textarea name="postBody" required>{{post.postBody}}</textarea> 
     </div>
+
+    <button type="submit" class="button-submit">Edit Post</button>
+
+</form>
