@@ -34,7 +34,7 @@ router.get("/add", ensureAuthenticated, (req, res) => {
 
 /*
 // retrieve comments from a post //TODO:1
-router.get("/comments/:id", ensureAuthenticated, (req, res) => {
+router.get("/api/comments/:id", ensureAuthenticated, (req, res) => {
     BlogPost.findOne({
         _id: req.params.id
     })
@@ -44,7 +44,7 @@ router.get("/comments/:id", ensureAuthenticated, (req, res) => {
 });
 
 // add a comment to a post TODO: on this
-router.post("/comment/:id", ensureAuthenticated, (req, res) => {
+router.post("/api/comment", ensureAuthenticated, (req, res) => {
     let errors = [];
     if (!req.body.commentBody) {
         errors.push({text: "Please add a comment"}); 
@@ -65,12 +65,12 @@ router.post("/comment/:id", ensureAuthenticated, (req, res) => {
 });
 
 // modify a comment //TODO:
-router.put("/comment/:id", ensureAuthenticated, (req, res) => {
+router.put("/api/comment/:id", ensureAuthenticated, (req, res) => {
 
 })
 
 // delete a comment TODO:
-router.delete("/comment/postid:/commentid:")
+router.delete("/api/comment/postid:/commentid:")
     BlogPost.findOne({
         _id: req.params.postid
     })

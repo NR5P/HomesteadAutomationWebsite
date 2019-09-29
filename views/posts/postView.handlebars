@@ -16,13 +16,18 @@
     </form>
 </div>
 
+{{#if user}}
+    <input type="hidden" id="user-id" value="{{user._id}}">
+    <input type="hidden" id="post-id" value="{{post._id}}">
+{{/if}}
+
 <div class="card">
     <div class="container">
-        <h2>{{#if user.comments}}Comments{{else}}No Comments{{/if}}</h2>
+        <h2>{{#if post.comments}}Comments{{else}}No Comments{{/if}}</h2>
     </div>
 </div>
 
-{{#each user.comments}}
+{{#each post.comments}}
     <div class="card">
         <div class="container">
             <p>{{date}}</p>
@@ -41,7 +46,7 @@
             <form action="">
                 <textarea name="comment" id="add-comment"></textarea>
             </form>
-            <a href="/posts/add" class="btn-add">Add Comment</a>
+            <button href="/posts/add" class="btn-add" id="add-comment-btn">Add Comment</button>
         {{/if}}
     </div>
 </div>

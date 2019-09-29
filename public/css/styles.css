@@ -162,7 +162,6 @@ form textarea {
     display: inline-block;
     font-size: 16px;
     margin: 10px;
-    font-family: 'Poppins', sans-serif;
     width: 100px;
 }
 .btn-edit:hover {
@@ -186,14 +185,21 @@ form textarea {
 }
 
 .btn-add {
-    background-color: #4d79ff;
-    color: white;
+    background-color: white;
+    border: 2px solid #4d79ff;
+    color: #4d79ff;
     padding: 14px 25px;
-    text-align: center;
     text-decoration: none;
+    text-align: center;
+    font-size: 16px;
     display: block;
     margin: 10px auto;
     width: 80%;
+}
+.btn-add:hover {
+    background-color: #1a53ff;
+    color: white;
+    transition: .3s
 }
 
 /**new button TODO:*/
@@ -204,11 +210,14 @@ form textarea {
     border-radius: 5px;
     padding: 10px;
     margin-top: 20px;
-    font-family: 'Poppins', sans-serif;
 }
 
 #delete-btn-form {
     display: inline-block;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
 }
 
 /***************************end blog post*********************************************************/
