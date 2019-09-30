@@ -25,10 +25,13 @@ burger.addEventListener("click", () => {
 
 /*******************comments********************************************************/
 document.getElementById("add-comment-btn").addEventListener("click", () => {
-    fetch("/api/comment", {
+    if (commentTextArea.value == "") {
+        commentTextArea.style.border = "2px solid red";
+    } else {
+    fetch("/posts/api/comment", {
         method: "POST",
         headers: {
-            "Accept" : "application/json, text/plain, */*",
+            "Accept" : "application/json",
             "Content-type" : "application/json"
         },
         body: JSON.stringify({
@@ -37,8 +40,10 @@ document.getElementById("add-comment-btn").addEventListener("click", () => {
             postId: postId.value
         })
     })
-    //.then((res) => res.json())
-    //.then((data) => console.log(data))
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err))
+    }
 });
 
 /*******************end comments********************************************************/

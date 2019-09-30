@@ -42,28 +42,30 @@ router.get("/api/comments/:id", ensureAuthenticated, (req, res) => {
         res.json(post.comments);
     });
 });
+*/
 
 // add a comment to a post TODO: on this
 router.post("/api/comment", ensureAuthenticated, (req, res) => {
     let errors = [];
     if (!req.body.commentBody) {
         errors.push({text: "Please add a comment"}); 
+        res.json(errors);
     }
+    const newComment = new Comments({
+        commentBody: req.body.commentBody,
+        author: req.user._id
+    })
     BlogPost.findOne({
-        _id: req.params.id
+        _id: req.body.postId
     })
     .then(post => {
-        const newComment = {
-            commentBody = req.params.commentBody,
-            commentAuthor = req.params.author
-        }
-        post.comments.push(newComment)
-            .then(() =>{
-                res.send(newComment);
-            });
-    });
+        post.comments.push(newComment);
+        post.save()
+    })
+    .then(res.json(newComment))
 });
 
+/*
 // modify a comment //TODO:
 router.put("/api/comment/:id", ensureAuthenticated, (req, res) => {
 
