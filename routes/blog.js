@@ -34,7 +34,6 @@ router.get("/add", ensureAuthenticated, (req, res) => {
     });
 });
 
-/*
 // retrieve comments from a post //TODO:1
 router.get("/api/comments/:id", ensureAuthenticated, (req, res) => {
     BlogPost.findOne({
@@ -44,9 +43,8 @@ router.get("/api/comments/:id", ensureAuthenticated, (req, res) => {
         res.json(post.comments);
     });
 });
-*/
 
-// add a comment to a post TODO: on this
+// add a comment to a post 
 router.post("/api/comment", ensureAuthenticated, (req, res) => {
     let newComment = {};
     let errors = [];
