@@ -7,10 +7,12 @@ const CommentSchema = new Schema({
         required: true
     },
     authorId: mongoose.Schema.Types.ObjectId,
-    authorUserId: String,
+    authorUserName: String,
     authorLocation: [String],
-    authorAdminPrvlg: Boolean,
-    authorUserId: String,
+    authorAdminPrivlg: {
+        type: Boolean,
+        default: false
+    },
     authorDateJoined: Date,
     date: {
         type: Date,

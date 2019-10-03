@@ -60,8 +60,8 @@ router.post("/api/comment", ensureAuthenticated, (req, res) => {
     .then(user => {
         newComment = new Comments({
             commentBody: req.body.commentBody,
-            authorId: req.user._id,
-            authorUserId: user.userName,
+            authorId: user._id,
+            authorUserName: user.userName,
             authorLocation: user.contact,
             authorAdminPrvlg: user.admin,
             authorDateJoined: user.dateJoined

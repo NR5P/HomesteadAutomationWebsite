@@ -31,7 +31,16 @@
     <div class="card">
         <div class="container">
             <p>{{date}}</p>
-            <p>{{author}}</p>
+            <p>{{authorId}}</p>
+            <p>{{authorUserName}}</p>
+            {{#each authorLocation}}
+                <p>{{city}}</p>
+                <p>{{state}}</p>
+                <p>{{zip}}</p>
+                <p>{{phoneNumber}}</p>
+            {{/each}}
+            <p>{{authorAdminPrivlg}}</p>
+            <p>{{authorDateJoined}}</p>
             <p>{{commentBody}}</p>
             <button class="btn-edit">Edit</button>
             <button class="btn-delete">Delete</button>
