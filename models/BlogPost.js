@@ -6,7 +6,12 @@ const CommentSchema = new Schema({
         type: String,
         required: true
     },
-    author: mongoose.Schema.Types.ObjectId,
+    authorId: mongoose.Schema.Types.ObjectId,
+    authorUserId: String,
+    authorLocation: [String],
+    authorAdminPrvlg: Boolean,
+    authorUserId: String,
+    authorDateJoined: Date,
     date: {
         type: Date,
         default: Date.now

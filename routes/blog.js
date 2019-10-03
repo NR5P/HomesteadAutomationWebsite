@@ -6,8 +6,10 @@ const {ensureAuthenticated} = require("../helpers/auth");
 
 // load models
 require("../models/BlogPost");
+require("../models/User");
 const BlogPost = mongoose.model("blogPosts");
 const Comments = mongoose.model("comments");
+const Users = mongoose.model("users");
 
 // view individual post TODO: working on now
 router.get("/view/:id", (req,res) => {
@@ -46,14 +48,24 @@ router.get("/api/comments/:id", ensureAuthenticated, (req, res) => {
 
 // add a comment to a post TODO: on this
 router.post("/api/comment", ensureAuthenticated, (req, res) => {
+    let newComment = {};
     let errors = [];
     if (!req.body.commentBody) {
         errors.push({text: "Please add a comment"}); 
         res.json(errors);
     }
-    const newComment = new Comments({
-        commentBody: req.body.commentBody,
-        author: req.user._id
+    Users.findOne({
+        _id: req.user._id
+    })
+    .then(user => {
+        newComment = new Comments({
+            commentBody: req.body.commentBody,
+            authorId: req.user._id,
+            authorUserId: user.userName,
+            authorLocation: user.contact,
+            authorAdminPrvlg: user.admin,
+            authorDateJoined: user.dateJoined
+        })
     })
     BlogPost.findOne({
         _id: req.body.postId
