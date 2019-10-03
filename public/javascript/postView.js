@@ -1,3 +1,14 @@
+const userId = document.getElementById("user-id").value
+
+
+//TODO: exchange this with the way comments are loaded now. this will allow comparing 
+// with the comments currently and updating livish
+window.onload = () => {
+    fetch(`/posts/api/comments/${userId}`)    
+        .then(res => res.json())
+        .then(data => console.log(data));
+};
+
 /*******************comments********************************************************/
 document.getElementById("add-comment-btn").addEventListener("click", () => {
     if (commentTextArea.value == "") {
