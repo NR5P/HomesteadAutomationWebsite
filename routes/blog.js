@@ -12,7 +12,7 @@ const Comments = mongoose.model("comments");
 const Users = mongoose.model("users");
 
 // view individual post TODO: working on now
-router.get("/view/:id", (req,res) => {
+router.get("/:id", (req,res) => {
     BlogPost.findOne({
         _id: req.params.id
     })
@@ -27,15 +27,16 @@ router.get("/view/:id", (req,res) => {
 
 
 // add a post
-router.get("/add", ensureAuthenticated, (req, res) => {
+router.get("/addPost", ensureAuthenticated, (req, res) => {
     const title = "Homestead Automation-Add Post";
     res.render("posts/add", {
         title:title
-    });
+    })
+    .catch(err=>console.log(err));
 });
 
 // retrieve comments from a post //TODO:1
-router.get("/api/comments/:id", ensureAuthenticated, (req, res) => {
+router.get("/api/:id", (req, res) => {
     BlogPost.findOne({
         _id: req.params.id
     })
@@ -45,7 +46,7 @@ router.get("/api/comments/:id", ensureAuthenticated, (req, res) => {
 });
 
 // add a comment to a post 
-router.post("/api/comment", ensureAuthenticated, (req, res) => {
+router.post("/api/comment", (req, res) => {
     let newComment = {};
     let errors = [];
     if (!req.body.commentBody) {
