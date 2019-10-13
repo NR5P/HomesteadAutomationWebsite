@@ -27,7 +27,7 @@ router.get("/:id", (req,res) => {
 
 
 // add a post
-router.get("/addPost", ensureAuthenticated, (req, res) => {
+router.get("/add", ensureAuthenticated, (req, res) => {
     const title = "Homestead Automation-Add Post";
     res.render("posts/add", {
         title:title
