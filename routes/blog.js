@@ -11,6 +11,15 @@ const BlogPost = mongoose.model("blogPosts");
 const Comments = mongoose.model("comments");
 const Users = mongoose.model("users");
 
+
+// add a post
+router.get("/add", ensureAuthenticated, (req, res) => {
+    const title = "Homestead Automation-Add Post";
+    res.render("posts/add", {
+        title:title
+    })
+});
+
 // view individual post TODO: working on now
 router.get("/:id", (req,res) => {
     BlogPost.findOne({
@@ -21,32 +30,26 @@ router.get("/:id", (req,res) => {
         res.render("posts/postView", {
             post: post,
             title: title
-        });
-    });
+        })
+    }).catch(err=>console.log(err))
 });
 
 
-// add a post
-router.get("/add", ensureAuthenticated, (req, res) => {
-    const title = "Homestead Automation-Add Post";
-    res.render("posts/add", {
-        title:title
-    })
-    .catch(err=>console.log(err));
-});
 
-// retrieve comments from a post //TODO:1
+// retrieve comments from a post
 router.get("/api/:id", (req, res) => {
     BlogPost.findOne({
         _id: req.params.id
     })
     .then(post => {
-        res.json(post.comments);
-    });
+        if (post.comments)
+            res.json(post.comments);
+    })
+    .catch(err=>res.json(err))
 });
 
 // add a comment to a post 
-router.post("/api/comment", (req, res) => {
+router.post("/api", (req, res) => {
     let newComment = {};
     let errors = [];
     if (!req.body.commentBody) {
@@ -57,24 +60,25 @@ router.post("/api/comment", (req, res) => {
         _id: req.user._id
     })
     .then(user => {
-        newComment = new Comments({
+        newComment = {
             commentBody: req.body.commentBody,
             authorId: user._id,
             authorUserName: user.userName,
             authorLocation: user.contact,
             authorAdminPrvlg: user.admin,
             authorDateJoined: user.dateJoined
-        })
+        }
     })
-    BlogPost.findOne({
+    .then(BlogPost.findOne({
         _id: req.body.postId
     })
     .then(post => {
-        post.comments.push(newComment);
-        post.save()
+        post.comments.push(new Comments(newComment));
+        post.save();
+        res.json(newComment)
     })
-    .then(res.json(newComment))
-});
+    .catch(err=>res.json(err))
+)});
 
 /*
 // modify a comment //TODO:
@@ -105,7 +109,8 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
         res.render("posts/edit", {
             title: title,
             post:post
-        });
+        })
+        .catch(err=>console.log(err));
     });
 });
 
@@ -125,7 +130,7 @@ router.post("/", (req, res) => {
             errors: errors,
             postTitle: req.body.postTitle,
             postBody: req.body.postBody
-        });
+        }).catch(err=>console.log(err));
     } else {
         const newPost = {
             postTitle: req.body.postTitle,

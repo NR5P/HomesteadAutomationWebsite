@@ -5,10 +5,10 @@
         <p>{{post.postBody}}</p>
     </div>
     {{#if user}}
-        <button onclick="window.location.href = '/posts/edit/{{id}}';" class="btn-edit">Edit</button>
+        <button onclick="window.location.href = '/posts/edit/{{user.id}}';" class="btn-edit">Edit</button>
     {{/if}}
     <!-- delete post -->
-    <form method="POST" id="delete-btn-form" action="/posts/{{id}}?_method=DELETE">
+    <form method="POST" id="delete-btn-form" action="/posts/{{user.id}}?_method=DELETE">
         <input type="hidden" name="_method" value="DELETE">
         {{#if user}}
             <button type="submit" class="btn-delete">Delete</button>
@@ -17,7 +17,7 @@
 </div>
 
 {{#if user}}
-    <input type="hidden" id="user-id" value="{{user._id}}">
+    <input type="hidden" id="user-id" value="{{user.id}}">
     <input type="hidden" id="post-id" value="{{post._id}}">
 {{/if}}
 
@@ -27,6 +27,10 @@
     </div>
 </div>
 
+<div id="comment-div"></div>
+
+<!--
+{{#if post.comments}}
 {{#each post.comments}}
     <div class="card">
         <div class="container">
@@ -47,6 +51,8 @@
         </div>
     </div>
 {{/each}}
+{{/if}}
+-->
 
 <div class="card">
     <div class="container">
@@ -54,7 +60,7 @@
             <form action="">
                 <textarea name="comment" id="add-comment"></textarea>
             </form>
-            <button href="/posts/add" class="btn-add" id="add-comment-btn">Add Comment</button>
+            <button class="btn-add" id="add-comment-btn">Add Comment</button>
         {{/if}}
     </div>
 </div>
