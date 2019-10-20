@@ -23,6 +23,17 @@
 
 <div class="card">
     <div class="container">
+        {{#if user}}
+            <form action="">
+                <textarea name="comment" id="add-comment"></textarea>
+            </form>
+            <button class="btn-add" id="add-comment-btn">Add Comment</button>
+        {{/if}}
+    </div>
+</div>
+
+<div class="card">
+    <div class="container">
         <h2>{{#if post.comments}}Comments{{else}}No Comments{{/if}}</h2>
     </div>
 </div>
@@ -54,14 +65,4 @@
 {{/if}}
 -->
 
-<div class="card">
-    <div class="container">
-        {{#if user}}
-            <form action="">
-                <textarea name="comment" id="add-comment"></textarea>
-            </form>
-            <button class="btn-add" id="add-comment-btn">Add Comment</button>
-        {{/if}}
-    </div>
-</div>
 <script src="/javascript/postView.js"></script>

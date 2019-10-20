@@ -18,9 +18,9 @@ window.onload = () => {
                                     <input class="comment-id" type="hidden" value=${post._id}>
                                     <p class="author-name">${post.authorUserName}</p>
                                     <img class="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
+                                    <small class="member-since">${memberSince(post.authorDateJoined)}</small>
                                 </div>
                                 <span class="comment-span-right">
-                                    <p class="member-since">${memberSince(post.authorDateJoined)}</p>
                                     <p class="post-date">${getPostDateTime(post.date)}</p>
                                     <p class="post-content">${post.commentBody}</p>
                                 </span> 
@@ -79,8 +79,8 @@ window.setInterval(() => {
                     if (comment.firstElementChild.firstElementChild.value == post._id) {
                         // if there's a match see if text has been changed, if it has then change it
                         postFound = true;
-                        if (post.commentBody != comment.children[1].children[2].innerText) {
-                            comment.children[1].children[2].innerText = post.commentBody;
+                        if (post.commentBody != comment.children[1].children[1].innerText) {
+                            comment.children[1].children[1].innerText = post.commentBody;
                         }
                     } 
                 });
@@ -94,9 +94,9 @@ window.setInterval(() => {
                                     <input class="comment-id" type="hidden" value=${post._id}>
                                     <p class="author-name">${post.authorUserName}</p>
                                     <img class="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
+                                    <p class="member-since">${memberSince(post.authorDateJoined)}</p>
                                 </div>
                                 <span class="comment-span-right">
-                                    <p class="member-since">${memberSince(post.authorDateJoined)}</p>
                                     <p class="post-date">${getPostDateTime(post.date)}</p>
                                     <p class="post-content">${post.commentBody}</p>
                                 </span> 

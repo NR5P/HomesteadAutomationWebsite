@@ -233,7 +233,13 @@ button {
 }
 
 .comment-span-right {
-    display: inline-block;
+    display: inline;
+    text-align: left;
+
+}
+
+.post-content {
+    margin: 5px 30px;
 }
 
 .author-name {
