@@ -129,6 +129,7 @@ form textarea {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 80%;
+    min-height: 120px;
     margin: 20px auto;
 }
 
@@ -219,6 +220,25 @@ form textarea {
 button {
     font-family: 'Poppins', sans-serif;
 }
+
+.avatar {
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+}
+
+.comment-span-left {
+    float: left;
+}
+
+.comment-span-right {
+    display: inline-block;
+}
+
+.author-name {
+    margin-bottom: 5px;
+}
+
 
 /***************************end blog post*********************************************************/
 
