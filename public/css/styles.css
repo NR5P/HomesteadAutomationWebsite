@@ -119,6 +119,11 @@ form textarea {
     margin: 0 auto;
 }
 
+form input {
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
 #comment-text-add {
     width: 100%;
 }
