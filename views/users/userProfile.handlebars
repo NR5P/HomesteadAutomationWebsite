@@ -1,6 +1,6 @@
 <div class="card">
     <div class="container">
-        <form>
+        <formi>
             <label for="userName">User Name</label>
             <input type="text" name="userName" value={{user.userName}}>
 
@@ -21,9 +21,12 @@
 
             <labe for="avatar">Profile Picture</labe>
             <input type="file" id="avatar" accept="image/png", "image/jpeg">
+
         </form>
+    </div>
+    <div id="cropper-div">
+        <img src="/images/homestead-automation-logo.svg" alt="logo" id="img-cropper">
     </div>
 </div>
 
-<script src="/javascript/userProfile.js"></script>
-<script src="/path/to/cropper.js"></script>
+<script src="/javascript/bundles/userProfile.bundle.js"></script>

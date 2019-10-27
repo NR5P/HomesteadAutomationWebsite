@@ -127,6 +127,15 @@ form input {
 #comment-text-add {
     width: 100%;
 }
+
+#img-cropper {
+    max-width: 100%;
+}
+
+#cropper-div {
+    width: 500px;
+    height: 500px;
+}
 /******************************end form**************************************************************/
 
 
