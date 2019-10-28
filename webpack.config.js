@@ -10,4 +10,20 @@ module.exports = {
         filename: "[name].bundle.js",
         path: path.resolve(__dirname,"./public/javascript/bundles"),
     },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: "style-loader!css-loader"
+            },
+            {
+                test: /\.es6$/,
+                exclude: /node_modules/,
+                use: "babel-loader"
+            }
+        ] 
+    },
+    resolve: {
+    }
 };
