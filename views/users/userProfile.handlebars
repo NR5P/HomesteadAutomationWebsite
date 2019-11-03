@@ -1,6 +1,6 @@
 <div class="card">
     <div class="container">
-        <formi>
+        <form>
             <label for="userName">User Name</label>
             <input type="text" name="userName" value={{user.userName}}>
 
@@ -19,14 +19,16 @@
             <label for="phoneNumber">Phone Number</label>
             <input type="tel" name="phoneNumber" id="phoneNumber" value={{user.contact.phoneNumber}}>
 
-            <labe for="avatar">Profile Picture</labe>
-            <input type="file" id="avatar" accept="image/png", "image/jpeg">
 
+            <img src="/images/tux.jpg" alt="image to crop">
+            <input type="file" id="avatar" accept="image/*">
+
+            <button class="button-submit pic-submit" type="submit">Submit</button>
+            <button type="button" class="button-submit" id="select-img-btn">click to change picture or drag and drop</button>
         </form>
     </div>
-    <div id="cropper-div">
-        <img src="/images/homestead-automation-logo.svg" alt="logo" id="img-cropper">
-    </div>
 </div>
+
+<img src="/images/tux.jpg" alt="image to crop" id="croppr">
 
 <script src="/javascript/bundles/userProfile.bundle.js"></script>

@@ -1,1 +1,100 @@
-!function(e){var t={};function n(a){if(t[a])return t[a].exports;var o=t[a]={i:a,l:!1,exports:{}};return e[a].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,a){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:a})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var a=Object.create(null);if(n.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(a,o,function(t){return e[t]}.bind(null,o));return a},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=2)}({2:function(e,t){const n=document.getElementById("user-id"),a=document.getElementById("post-id"),o=document.getElementById("add-comment");let s=document.getElementById("comment-div");function c(e){let t=new Date(e),n=new Date(Date.now()-t);return n.getTime<1e4?"just now":n.getTime<6e4?"less than a minute ago":n.getTime<6e5?"less than 10 minutes ago":n.getTime<18e5?"less than half hour ago":n.getTime<36e5?"less than an hour ago":n.getTime<864e5?"less than a day ago":"posted on "+t.toLocaleDateString()}function r(e){return"member since "+new Date(e).toLocaleDateString()}window.onload=()=>{fetch(`/posts/api/${a.value}`,{method:"GET"}).then(e=>e.json()).then(e=>{e.forEach(e=>{output=`\n                    <div class="card">\n                        <div class="container">\n                            <div class="comment">\n                                <div class="comment-span-left">\n                                    <input class="comment-id" type="hidden" value=${e._id}>\n                                    <p class="author-name">${e.authorUserName}</p>\n                                    <img class="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />\n                                    <small class="member-since">${r(e.authorDateJoined)}</small>\n                                </div>\n                                <span class="comment-span-right">\n                                    <p class="post-date">${c(e.date)}</p>\n                                    <p class="post-content">${e.commentBody}</p>\n                                </span> \n                            </div>\n                        </div> \n                    </div\n                `,s.innerHTML+=output})})},document.getElementById("add-comment-btn").addEventListener("click",()=>{""==o.value?o.style.border="2px solid red":fetch("/posts/api",{method:"POST",headers:{Accept:"application/json","Content-type":"application/json"},body:JSON.stringify({commentBody:o.value,userId:n.value,postId:a.value})}).then(e=>e.json()).then(e=>console.log(e))}),window.setInterval(()=>{let e=!1;commentsList=document.querySelectorAll(".comment"),fetch(`/posts/api/${a.value}`,{method:"GET"}).then(e=>e.json()).then(t=>{t.forEach(t=>{e=!1,commentsList.forEach(n=>{n.firstElementChild.firstElementChild.value==t._id&&(e=!0,t.commentBody!=n.children[1].children[1].innerText&&(n.children[1].children[1].innerText=t.commentBody))}),0==e&&(output=`\n                    <div class="card">\n                        <div class="container">\n                            <div class="comment">\n                                <div class="comment-span-left">\n                                    <input class="comment-id" type="hidden" value=${t._id}>\n                                    <p class="author-name">${t.authorUserName}</p>\n                                    <img class="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />\n                                    <p class="member-since">${r(t.authorDateJoined)}</p>\n                                </div>\n                                <span class="comment-span-right">\n                                    <p class="post-date">${c(t.date)}</p>\n                                    <p class="post-content">${t.commentBody}</p>\n                                </span> \n                            </div>\n                        </div> \n                    </div\n                    `,s.innerHTML+=output)})})},1e4)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./public/javascript/postView.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./public/javascript/postView.js":
+/*!***************************************!*\
+  !*** ./public/javascript/postView.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("const userIdFromHidTag = document.getElementById(\"user-id\");\nconst postIdFromHidTag = document.getElementById(\"post-id\");\nconst commentBody = document.getElementById(\"add-comment\");\nlet commentDiv = document.getElementById(\"comment-div\");\n\n\n//TODO: make this check every 10 seconds for a new comment and append to the html with new comment\nwindow.onload = () => {\n    fetch(`/posts/api/${postIdFromHidTag.value}`, {method: \"GET\"})    \n        .then(res => res.json())\n        .then(data => {\n            data.forEach(post => {\n                output = `\n                    <div class=\"card\">\n                        <div class=\"container\">\n                            <div class=\"comment\">\n                                <div class=\"comment-span-left\">\n                                    <input class=\"comment-id\" type=\"hidden\" value=${post._id}>\n                                    <p class=\"author-name\">${post.authorUserName}</p>\n                                    <img class=\"avatar\" src=\"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50\" />\n                                    <small class=\"member-since\">${memberSince(post.authorDateJoined)}</small>\n                                </div>\n                                <span class=\"comment-span-right\">\n                                    <p class=\"post-date\">${getPostDateTime(post.date)}</p>\n                                    <p class=\"post-content\">${post.commentBody}</p>\n                                </span> \n                            </div>\n                        </div> \n                    </div\n                `\n                commentDiv.innerHTML += output;\n            });\n        });\n};\n\n/*******************comments********************************************************/\ndocument.getElementById(\"add-comment-btn\").addEventListener(\"click\", () => {\n    if (commentBody.value == \"\") {\n        commentBody.style.border = \"2px solid red\";\n    } else {\n    fetch(\"/posts/api\", {\n        method: \"POST\",\n        headers: {\n            \"Accept\" : \"application/json\",\n            \"Content-type\" : \"application/json\"\n        },\n        body: JSON.stringify({\n            commentBody: commentBody.value,\n            userId: userIdFromHidTag.value,\n            postId: postIdFromHidTag.value\n        })\n    })\n    .then((res) => res.json())\n    .then((data) => console.log(data))\n    }\n});\n\n\n/*******************end comments********************************************************/\n\n//TODO: javascript function to append to div. can be used for checking coments made by the 10 sec\n// check and also the comment return on the posting comment to append to div\n// also adjust comment time each go around\n\nwindow.setInterval(() => {\n    let postFound = false;\n    commentsList = document.querySelectorAll(\".comment\");\n    /*\n    commentsList.forEach(comment => {\n        console.log(comment.firstElementChild.firstElementChild.value);\n    })\n    */\n    fetch(`/posts/api/${postIdFromHidTag.value}`, {method: \"GET\"})    \n        .then(res => res.json())\n        .then(data => {\n            data.forEach(post => {\n                postFound = false;\n                commentsList.forEach(comment => {\n                    if (comment.firstElementChild.firstElementChild.value == post._id) {\n                        // if there's a match see if text has been changed, if it has then change it\n                        postFound = true;\n                        if (post.commentBody != comment.children[1].children[1].innerText) {\n                            comment.children[1].children[1].innerText = post.commentBody;\n                        }\n                    } \n                });\n                // if it did not find the post then add it.\n                if (postFound == false) {\n                    output = `\n                    <div class=\"card\">\n                        <div class=\"container\">\n                            <div class=\"comment\">\n                                <div class=\"comment-span-left\">\n                                    <input class=\"comment-id\" type=\"hidden\" value=${post._id}>\n                                    <p class=\"author-name\">${post.authorUserName}</p>\n                                    <img class=\"avatar\" src=\"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50\" />\n                                    <p class=\"member-since\">${memberSince(post.authorDateJoined)}</p>\n                                </div>\n                                <span class=\"comment-span-right\">\n                                    <p class=\"post-date\">${getPostDateTime(post.date)}</p>\n                                    <p class=\"post-content\">${post.commentBody}</p>\n                                </span> \n                            </div>\n                        </div> \n                    </div\n                    `\n                    commentDiv.innerHTML += output;\n                }\n            });\n        });\n\n    // check for comments that are new\n        // check by comment id\n        // check to see if the comment text is different\n    // adjust comment times and outtput as needed(put this in antoehr function)\n    // if post on browser but not in json then delete from browser...maybe\n}, 10000);\n\nfunction getPostDateTime(DateOfPost) {\n    let postDate = new Date(DateOfPost)\n    let timeDifference = new Date(Date.now() - postDate);\n\n    const tenSeconds = 10000;\n    const minute = 60000;\n    const hour = 3600000;\n    const day = 86400000;\n\n    if (timeDifference.getTime < tenSeconds) {\n        return \"just now\";\n    } else if (timeDifference.getTime < minute) {\n        return \"less than a minute ago\";\n    } else if (timeDifference.getTime < (minute * 10)) {\n        return \"less than 10 minutes ago\";\n    } else if (timeDifference.getTime < (minute * 30)) {\n        return \"less than half hour ago\";\n    } else if (timeDifference.getTime < hour) {\n        return \"less than an hour ago\";\n    } else if (timeDifference.getTime < day) {\n        return \"less than a day ago\"\n    } else {\n        return \"posted on \" + postDate.toLocaleDateString();\n    }\n}\n\nfunction memberSince(DateOfMembership) {\n    let memberDate = new Date(DateOfMembership);\n    return \"member since \" + memberDate.toLocaleDateString();\n}\n\n//# sourceURL=webpack:///./public/javascript/postView.js?");
+
+/***/ })
+
+/******/ });

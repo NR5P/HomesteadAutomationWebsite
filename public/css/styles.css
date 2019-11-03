@@ -128,12 +128,13 @@ form input {
     width: 100%;
 }
 
-#img-cropper {
-    max-width: 100%;
+#croppr {
+}
+.croppr-container {
+    display: flex;
+    justify-content: center;
 }
 
-#cropper-div {
-}
 /******************************end form**************************************************************/
 
 
@@ -234,11 +235,6 @@ button {
     font-family: 'Poppins', sans-serif;
 }
 
-.avatar {
-    width: 75px;
-    height: 75px;
-    display: inline-block;
-}
 
 .comment-span-left {
     float: left;
@@ -260,6 +256,39 @@ button {
 
 
 /***************************end blog post*********************************************************/
+
+/**************picture submit**************************/
+.avatar {
+    width: 75px;
+    height: 75px;
+}
+#avatar {
+    display: none;
+}
+#pic-file-input {
+    display: none;
+    width: 80%;
+    margin: 0 auto;
+}
+#select-img-btn {
+    background-color: white;
+    color: #66b3ff;
+    border: 2px solid #66b3ff;
+    border-radius: 5px;
+    padding: 100px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.pic-submit {
+    width: 100%;
+}
+
+
+/********************************************************/
 
 /**********************media queries**************************************************/
 @media screen and (max-width: 1600px) {

@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+    mode: 'development',
     entry: {
         app: "./public/javascript/app.js",
         postView: "./public/javascript/postView.js",
