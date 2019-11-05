@@ -2,6 +2,7 @@ import Croppr from "croppr";
 
 const imgFileElement = document.getElementById("avatar");
 const selectImageBtn = document.getElementById("select-img-btn");
+const changedImg = document.getElementById("changed-image");
 
 /***************phone number formatter**************************** */
 const phoneNumber = document.getElementById("phoneNumber");
@@ -26,6 +27,7 @@ let cropper = new Croppr("#croppr", {
 imgFileElement.addEventListener("change", () => {
     console.log("file added");
     console.log(imgFileElement.files[0].name);
+    handleImageFile(imgFileElement.files[0]);
 },false)
 
 selectImageBtn.addEventListener("click", (e) => {
@@ -49,4 +51,19 @@ selectImageBtn.addEventListener("drop", (e) => {
     const files = dt.files;
     //let file = this.files[0]; 
     console.log(files[0].name);
+    handleImageFile(files[0]);
 },false)
+
+/*
+handle files uploaded by user. this will show the image uploaded by the use and allow them
+to crop it before they upload it to the server
+*/
+function handleImageFile(file) {
+    if (file.type.startsWith("image/")) {
+        changedImg.file = file;    
+        const reader = new FileReader();
+        reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(changedImg);
+        reader.readAsDataURL(file);
+    }
+    
+}
