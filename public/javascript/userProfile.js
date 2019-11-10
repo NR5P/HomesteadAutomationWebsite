@@ -2,10 +2,11 @@ import Croppr from "croppr";
 
 const imgFileElement = document.getElementById("avatar");
 const selectImageBtn = document.getElementById("select-img-btn");
-const changedImg = document.getElementById("changed-image");
 const imgToCrop = document.getElementById("croppr");
 const currentProfilePic = document.getElementById("current-profile-pic");
+const avatarCoordinates = document.getElementById("avatar-coordinates");
 let cropper;
+
 
 /***************phone number formatter**************************** */
 const phoneNumber = document.getElementById("phoneNumber");
@@ -101,5 +102,5 @@ function getCroppedPhoto() {
 }
 
 function saveCrop() {
-    //TODO: this  where the image is going to be saved
+    avatarCoordinates.value = cropper.getValue();
 }
