@@ -28,8 +28,6 @@ let cropper = new Croppr("#croppr", {
 /************************************************************ */
 
 imgFileElement.addEventListener("change", () => {
-    console.log("file added");
-    console.log(imgFileElement.files[0].name);
     handleImageFile(imgFileElement.files[0]);
 },false)
 
@@ -60,7 +58,7 @@ handle files uploaded by user. this will show the image uploaded by the use and 
 to crop it before they upload it to the server
 */
 function handleImageFile(file) {
-    if (file.type.startsWith("image/")) {
+    if (file.type.startsWith("image/") && selectImageBtn.style.color !== "#FF9D0B") {
         imgToCrop.file = file;    
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -72,6 +70,8 @@ function handleImageFile(file) {
         selectImageBtn.innerText = "Click After Selection"
         selectImageBtn.style.fontSize = "30px";
         selectImageBtn.style.color = "#FF9D0B"
+    } else {
+        //TODO: this is where i'm at
     }
 }
 
