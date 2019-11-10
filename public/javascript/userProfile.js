@@ -4,6 +4,7 @@ const imgFileElement = document.getElementById("avatar");
 const selectImageBtn = document.getElementById("select-img-btn");
 const changedImg = document.getElementById("changed-image");
 const imgToCrop = document.getElementById("croppr");
+let cropper;
 
 /***************phone number formatter**************************** */
 const phoneNumber = document.getElementById("phoneNumber");
@@ -79,7 +80,7 @@ function handleImageFile(file) {
 }
 
 function handleCropImage() {
-    let cropper = new Croppr("#croppr", {
+    cropper = new Croppr("#croppr", {
         aspectRatio: 1,
         startSize: [50,50, '%']
     });
