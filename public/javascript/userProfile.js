@@ -4,6 +4,7 @@ const imgFileElement = document.getElementById("avatar");
 const selectImageBtn = document.getElementById("select-img-btn");
 const changedImg = document.getElementById("changed-image");
 const imgToCrop = document.getElementById("croppr");
+const currentProfilePic = document.getElementById("current-profile-pic");
 let cropper;
 
 /***************phone number formatter**************************** */
@@ -88,5 +89,12 @@ function handleCropImage() {
 
 function getCroppedPhoto() {
     let cropValue = cropper.getValue();
-    console.log(cropValue);
+    let canvas = document.createElement("canvas");
+    canvas.width = cropValue.width;
+    canvas.height = cropValue.height;
+    let context = canvas.getContext("2d");
+    context.drawImage(imgToCrop,-cropValue.x,-cropValue.y);
+
+    currentProfilePic.src = canvas.toDataURL();
+
 }
