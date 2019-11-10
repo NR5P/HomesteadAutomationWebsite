@@ -32,7 +32,10 @@ imgFileElement.addEventListener("change", () => {
 },false)
 
 selectImageBtn.addEventListener("click", (e) => {
-    imgFileElement.click();
+    if (selectImageBtn.innerText != "Select Cropped Region")
+        imgFileElement.click();
+    else
+        getCroppedPhoto();
 },false)
 
 selectImageBtn.addEventListener("dragenter", (e) => {
@@ -46,11 +49,13 @@ selectImageBtn.addEventListener("dragover", (e) => {
 },false)
 
 selectImageBtn.addEventListener("drop", (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    const dt = e.dataTransfer;
-    const files = dt.files;
-    handleImageFile(files[0]);
+    if (selectImageBtn.innerText != "Select Cropped Region") {
+        e.stopPropagation();
+        e.preventDefault();
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleImageFile(files[0]);
+    }
 },false)
 
 /*
@@ -58,7 +63,7 @@ handle files uploaded by user. this will show the image uploaded by the use and 
 to crop it before they upload it to the server
 */
 function handleImageFile(file) {
-    if (file.type.startsWith("image/") && selectImageBtn.style.color !== "#FF9D0B") {
+    if (file.type.startsWith("image/")) {
         imgToCrop.file = file;    
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -67,16 +72,20 @@ function handleImageFile(file) {
         }
 
         reader.readAsDataURL(file);
-        selectImageBtn.innerText = "Click After Selection"
+        selectImageBtn.innerText = "Select Cropped Region"
         selectImageBtn.style.fontSize = "30px";
         selectImageBtn.style.color = "#FF9D0B"
-    } else {
-        //TODO: this is where i'm at
-    }
+    } 
 }
 
 function handleCropImage() {
     let cropper = new Croppr("#croppr", {
-        aspectRatio: 1
+        aspectRatio: 1,
+        startSize: [50,50, '%']
     });
+}
+
+function getCroppedPhoto() {
+    let cropValue = cropper.getValue();
+    console.log(cropValue);
 }
