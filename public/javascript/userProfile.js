@@ -19,25 +19,18 @@ phoneNumber.addEventListener("keyup", (e)=> {
 })
 /******************************************************************* */
 
-/*******************************img cropper****************** */
-//const image = document.getElementById("img-cropper");
-/*
-let cropper = new Croppr("#croppr", {
-    aspectRatio: 1
-});
-*/
-
-/************************************************************ */
-
 imgFileElement.addEventListener("change", () => {
     handleImageFile(imgFileElement.files[0]);
 },false)
 
 selectImageBtn.addEventListener("click", (e) => {
-    if (selectImageBtn.innerText != "Select Cropped Region")
+    if (selectImageBtn.innerText == "click to change picture or drag and drop")
         imgFileElement.click();
-    else
+    else if (selectImageBtn.innerText == "Select Cropped Region")
         getCroppedPhoto();
+    else if (selectImageBtn.innerText == "Click to redo") {
+        startCropOver();
+    }
 },false)
 
 selectImageBtn.addEventListener("dragenter", (e) => {
@@ -51,7 +44,7 @@ selectImageBtn.addEventListener("dragover", (e) => {
 },false)
 
 selectImageBtn.addEventListener("drop", (e) => {
-    if (selectImageBtn.innerText != "Select Cropped Region") {
+    if (selectImageBtn.innerText == "click to change picture or drag and drop") {
         e.stopPropagation();
         e.preventDefault();
         const dt = e.dataTransfer;
@@ -97,4 +90,10 @@ function getCroppedPhoto() {
 
     currentProfilePic.src = canvas.toDataURL();
 
+    selectImageBtn.innerText = "Click to redo"
+    selectImageBtn.style.color = "#E85F66";
+}
+
+function startCropOver() {
+    console.log("start over");
 }
