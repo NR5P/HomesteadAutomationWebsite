@@ -52,8 +52,6 @@ selectImageBtn.addEventListener("drop", (e) => {
     e.preventDefault();
     const dt = e.dataTransfer;
     const files = dt.files;
-    //let file = this.files[0]; 
-    console.log(files[0].name);
     handleImageFile(files[0]);
 },false)
 
@@ -65,17 +63,13 @@ function handleImageFile(file) {
     if (file.type.startsWith("image/")) {
         imgToCrop.file = file;    
         const reader = new FileReader();
-        /*
-        reader.onload = (function(aImg) { 
-            return function(e) { aImg.src = e.target.result; }; 
-        })(imgToCrop);
-        */
         reader.onload = function(e) {
             imgToCrop.src = e.target.result;
             handleCropImage();
         }
 
         reader.readAsDataURL(file);
+        selectImageBtn.innerText = "Click After Selection"
     }
 }
 
