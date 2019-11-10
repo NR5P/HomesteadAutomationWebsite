@@ -28,8 +28,8 @@ selectImageBtn.addEventListener("click", (e) => {
         imgFileElement.click();
     else if (selectImageBtn.innerText == "Select Cropped Region")
         getCroppedPhoto();
-    else if (selectImageBtn.innerText == "Click to redo") {
-        startCropOver();
+    else if (selectImageBtn.innerText == "Click to save") {
+        saveCrop();
     }
 },false)
 
@@ -76,7 +76,13 @@ function handleImageFile(file) {
 function handleCropImage() {
     cropper = new Croppr("#croppr", {
         aspectRatio: 1,
-        startSize: [50,50, '%']
+        startSize: [50,50, '%'],
+        onCropStart: function() {
+            if (selectImageBtn.innerText = "Click to save") {
+                selectImageBtn.innerText = "Select Cropped Region";
+                selectImageBtn.style.color = "FF9D0B"; //TODO: why is this not owrking
+            }
+        }
     });
 }
 
@@ -90,10 +96,10 @@ function getCroppedPhoto() {
 
     currentProfilePic.src = canvas.toDataURL();
 
-    selectImageBtn.innerText = "Click to redo"
+    selectImageBtn.innerText = "Click to save"
     selectImageBtn.style.color = "#E85F66";
 }
 
-function startCropOver() {
-    console.log("start over");
+function saveCrop() {
+    //TODO: this  where the image is going to be saved
 }
