@@ -70,6 +70,8 @@ function handleImageFile(file) {
 
         reader.readAsDataURL(file);
         selectImageBtn.innerText = "Click After Selection"
+        selectImageBtn.style.fontSize = "30px";
+        selectImageBtn.style.color = "#FF9D0B"
     }
 }
 
