@@ -94,7 +94,7 @@ router.get("/logout", (req,res) => {
     res.redirect("/");
 });
 
-// user profile TODO: working on now
+// user profile
 router.get("/userProfile/:id", (req,res) => {
     User.findOne({_id:req.params.id})
         .then(user => {
