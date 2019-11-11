@@ -107,4 +107,12 @@ router.get("/userProfile/:id", (req,res) => {
         })
 })
 
+// edit user profile with additional information //TODO: working on now
+router.put("/userProfile/:id", (req,res) => {
+    User.findOne({_id:req.params.id})
+        .then(user => {
+
+        })
+})
+
 module.exports = router;

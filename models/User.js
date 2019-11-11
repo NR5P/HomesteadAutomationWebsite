@@ -35,6 +35,10 @@ const UserSchema = new Schema({
     admin: {
         type: Boolean,
         default: false
+    },
+    avatar: {
+        type: Map
+        //TODO: add default avatar photo
     }
 });
 
