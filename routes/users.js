@@ -111,7 +111,21 @@ router.get("/userProfile/:id", (req,res) => {
 router.put("/userProfile/:id", (req,res) => {
     User.findOne({_id:req.params.id})
         .then(user => {
+            user.userName = req.body.userName;
+            user.email = req.body.email;
+            user.contact.city = req.body.city;
+            user.contact.state = req.body.state;
+            user.contact.zip = req.body.zip;
+            user.contact.phoneNumber = req.body.phoneNumber;
+            user.avatarCrop = req.body.avatar-coordinates;
+            //TODO: deal with photo upload
+            //TODO: save file url
 
+            user.save()
+                .then(user => {
+                    req.flash("success_msg", "profile updated");
+                    req.redirect("/");
+                })
         })
 })
 
