@@ -19,9 +19,11 @@
             <input type="text" name="zip" value={{user.contact.zip}}>
 
             <label for="phoneNumber">Phone Number</label>
-            <input type="tel" name="phoneNumber" id="phoneNumber" value={{user.contact.phoneNumber}}>
+            <input type="tel" name="phoneNumber" id="phoneNumber">
 
-            <input type="file" id="avatar" accept="image/*">
+            <input type="hidden" name="user-id" value={{user.id}}>
+
+            <input type="file" id="avatar" name="avatar" accept="image/*">
             <input type="hidden" id="avatar-coordinates" name="avatar-coordinates">
 
             <button class="button-submit pic-submit" type="submit">Submit</button>

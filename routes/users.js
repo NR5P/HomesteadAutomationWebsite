@@ -3,6 +3,19 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const router = express.Router();
+const multer = require("multer");
+
+
+const storage = multer.diskStorage({
+    destination: "../images/",
+    filename: function(req,file,cb) {
+        cb(null,file.fieldname + "-" + req.body.user-id + file.originalname)
+    }
+});
+
+const upload = multer({
+    storage: storage
+}).single("avatar");
 
 // load user model
 require("../models/User");
@@ -108,7 +121,7 @@ router.get("/userProfile/:id", (req,res) => {
 })
 
 // edit user profile with additional information //TODO: working on now
-router.put("/userProfile/:id", (req,res) => {
+router.post("/:id", (req,res) => {
     User.findOne({_id:req.params.id})
         .then(user => {
             user.userName = req.body.userName;
