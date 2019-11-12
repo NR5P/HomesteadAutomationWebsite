@@ -9,7 +9,7 @@ const multer = require("multer");
 const storage = multer.diskStorage({
     destination: "../images/",
     filename: function(req,file,cb) {
-        cb(null,file.fieldname + "-" + req.body.user-id + file.originalname)
+        cb(null,file.fieldname + "-" + req.body.userId + file.originalname)
     }
 });
 
@@ -121,25 +121,31 @@ router.get("/userProfile/:id", (req,res) => {
 })
 
 // edit user profile with additional information //TODO: working on now
-router.post("/:id", (req,res) => {
-    User.findOne({_id:req.params.id})
-        .then(user => {
-            user.userName = req.body.userName;
-            user.email = req.body.email;
-            user.contact.city = req.body.city;
-            user.contact.state = req.body.state;
-            user.contact.zip = req.body.zip;
-            user.contact.phoneNumber = req.body.phoneNumber;
-            user.avatarCrop = req.body.avatar-coordinates;
-            //TODO: deal with photo upload
-            //TODO: save file url
-
-            user.save()
-                .then(user => {
-                    req.flash("success_msg", "profile updated");
-                    req.redirect("/");
-                })
-        })
+router.post("/userProfile/:id", (req,res) => {
+    upload(req,res,(err) => {
+        if (err) {
+            res.render(`/userProfile/${req.params.id}`)
+        } else {
+            User.findOne({_id:req.params.id})
+            .then(user => {
+                user.userName = req.body.userName;
+                user.email = req.body.email;
+                user.contact.city = req.body.city;
+                user.contact.state = req.body.state;
+                user.contact.zip = req.body.zip;
+                user.contact.phoneNumber = req.body.phoneNumber;
+                user.avatarCrop = req.body.avatarCoordinates;
+                //TODO: deal with photo upload
+                //TODO: save file url
+                console.log(req.file)
+                user.save()
+                    .then(user => {
+                        req.flash("success_msg", "profile updated");
+                        res.redirect("/");
+                    })
+            })
+        }
+    })
 })
 
 module.exports = router;

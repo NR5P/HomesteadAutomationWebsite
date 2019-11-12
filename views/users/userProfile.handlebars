@@ -2,7 +2,7 @@
 <div class="card">
     <div class="container">
         <img src="" alt="" id="current-profile-pic">
-        <form method="POST" action="userProfile/{{user.id}}" enctype="multipart/form-data">
+        <form method="POST" action="/userProfile/{{user._id}}" enctype="multipart/form-data">
             <label for="userName">User Name</label>
             <input type="text" name="userName" value={{user.userName}}>
 
@@ -21,10 +21,10 @@
             <label for="phoneNumber">Phone Number</label>
             <input type="tel" name="phoneNumber" id="phoneNumber">
 
-            <input type="hidden" name="user-id" value={{user.id}}>
+            <input type="hidden" name="userId" value={{user.id}}>
 
             <input type="file" id="avatar" name="avatar" accept="image/*">
-            <input type="hidden" id="avatar-coordinates" name="avatar-coordinates">
+            <input type="hidden" id="avatar-coordinates" name="avatarCoordinates">
 
             <button class="button-submit pic-submit" type="submit">Submit</button>
             <button type="button" class="button-submit" id="select-img-btn">click to change picture or drag and drop</button>
