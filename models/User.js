@@ -38,7 +38,9 @@ const UserSchema = new Schema({
     },
     avatarCrop: {
         type: Map
-        //TODO: add default avatar photo
+    },
+    avatarLink: {
+        type: String
     }
 });
 

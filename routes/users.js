@@ -135,6 +135,7 @@ router.post("/userProfile/:id", (req,res) => {
                 user.contact.zip = req.body.zip;
                 user.contact.phoneNumber = req.body.phoneNumber;
                 user.avatarCrop = new Map(Object.entries(req.body.avatarCoordinates));
+                user.avatarLink = req.file.path;
                 user.save()
                     .then(user => {
                         req.flash("success_msg", "profile updated");
