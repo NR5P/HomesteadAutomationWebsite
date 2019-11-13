@@ -7,7 +7,7 @@ const multer = require("multer");
 
 
 const storage = multer.diskStorage({
-    destination: "../images/",
+    destination: "./public/images/",
     filename: function(req,file,cb) {
         cb(null,file.fieldname + "-" + req.body.userId + file.originalname)
     }
@@ -136,8 +136,6 @@ router.post("/userProfile/:id", (req,res) => {
                 user.contact.phoneNumber = req.body.phoneNumber;
                 user.avatarCrop = new Map(Object.entries(req.body.avatarCoordinates));
                 user.avatarLink = req.file.path;
-                //TODO: deal with photo upload
-                //TODO: save file url
                 console.log(req.file)
                 user.save()
                     .then(user => {
