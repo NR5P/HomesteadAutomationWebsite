@@ -41,7 +41,7 @@ const UserSchema = new Schema({
         //TODO: add default avatar photo
     },
     avatarLink: {
-
+        type: String
     }
 });
 
