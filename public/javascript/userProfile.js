@@ -5,7 +5,11 @@ const selectImageBtn = document.getElementById("select-img-btn");
 const imgToCrop = document.getElementById("croppr");
 const currentProfilePic = document.getElementById("current-profile-pic");
 const avatarCoordinates = document.getElementById("avatar-coordinates");
+const userId = document.getElementById("userId");
+const formSubmit = document.getElementById("form-submit");
+const form = document.forms.namedItem("userProfileForm");
 let cropper;
+let canvas;
 
 
 /***************phone number formatter**************************** */
@@ -30,7 +34,9 @@ selectImageBtn.addEventListener("click", (e) => {
     else if (selectImageBtn.innerText == "Select Cropped Region")
         getCroppedPhoto();
     else if (selectImageBtn.innerText == "Click to save") {
-        saveCrop();
+        avatarCoordinates.value = cropper.getValue();
+        selectImageBtn.innerText = "Please press submit to update profile";
+        selectImageBtn.style.color = "green";
     }
 },false)
 
@@ -53,6 +59,20 @@ selectImageBtn.addEventListener("drop", (e) => {
         handleImageFile(files[0]);
     }
 },false)
+
+formSubmit.addEventListener("click", () => {
+    console.log("submitt");
+    let formData = new FormData(form);
+    canvas.toBlob(function(blob) {
+        formData.append("image", blob, "profile.jpg");
+    })
+
+    var request = new XMLHttpRequest();
+    request.open("POST", `/userProfile/${userId.value}`);
+    request.send(userProfileForm); 
+    console.log(userProfileForm)
+},false);
+
 
 /*
 handle files uploaded by user. this will show the image uploaded by the use and allow them
@@ -89,7 +109,7 @@ function handleCropImage() {
 
 function getCroppedPhoto() {
     let cropValue = cropper.getValue();
-    let canvas = document.createElement("canvas");
+    canvas = document.createElement("canvas");
     canvas.width = cropValue.width;
     canvas.height = cropValue.height;
     let context = canvas.getContext("2d");
@@ -101,6 +121,20 @@ function getCroppedPhoto() {
     selectImageBtn.style.color = "#E85F66";
 }
 
-function saveCrop() {
-    avatarCoordinates.value = cropper.getValue();
+
+/*
+function sendData() {
+    console.log("test");
+    userProfileForm = new FormData(document.getElementById("userProfileForm"));
+    canvas.toBlob(function(blob) {
+        userProfileForm.append("image", blob, "profile.jpg");
+    })
+
+    var request = new XMLHttpRequest();
+    request.open("POST", `/userProfle/${userId.value}`);
+    request.send(userProfileForm); 
+    console.log(userProfileForm)
+
+    return false;
 }
+*/

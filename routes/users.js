@@ -9,13 +9,13 @@ const multer = require("multer");
 const storage = multer.diskStorage({
     destination: "./public/images/",
     filename: function(req,file,cb) {
-        cb(null,file.fieldname + "-" + req.body.userId + file.originalname)
+        cb(null,file.fieldname + "-" + req.body.userId + "-" + file.originalname)
     }
 });
 
 const upload = multer({
     storage: storage
-}).single("avatar");
+}).single("avatar",2);
 
 // load user model
 require("../models/User");
@@ -136,6 +136,7 @@ router.post("/userProfile/:id", (req,res) => {
                 user.contact.phoneNumber = req.body.phoneNumber;
                 user.avatarCrop = new Map(Object.entries(req.body.avatarCoordinates));
                 user.avatarLink = req.file.path;
+                console.log(req.file);
                 user.save()
                     .then(user => {
                         req.flash("success_msg", "profile updated");
