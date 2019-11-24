@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage
-}).single("avatar",2);
+}).single("image");
 
 // load user model
 require("../models/User");
@@ -134,7 +134,7 @@ router.post("/userProfile/:id", (req,res) => {
                 user.contact.state = req.body.state;
                 user.contact.zip = req.body.zip;
                 user.contact.phoneNumber = req.body.phoneNumber;
-                user.avatarCrop = new Map(Object.entries(req.body.avatarCoordinates));
+                //user.avatarCrop = new Map(Object.entries(req.body.avatarCoordinates));
                 user.avatarLink = req.file.path;
                 console.log(req.file);
                 user.save()

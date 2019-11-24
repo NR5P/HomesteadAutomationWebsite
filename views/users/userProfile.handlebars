@@ -5,19 +5,19 @@
         <form method="POST" id="userProfileForm" name="userProfileForm" action="/userProfile/{{user._id}}" 
                onsubmit="sendData()" enctype="multipart/form-data">
             <label for="userName">User Name</label>
-            <input type="text" name="userName" value={{user.userName}}>
+            <input type="text" name="userName" id="userName" value={{user.userName}}>
 
             <label for="email">Email</label>
-            <input type="text" name="email" value={{user.email}}>
+            <input type="text" name="email" id="email" value={{user.email}}>
 
             <label for="city">City</label>
-            <input type="text" name="city" value={{user.contact.city}}>
+            <input type="text" name="city" id="city" value={{user.contact.city}}>
 
             <label for="state">State</label>
-            <input type="text" name="state" value={{user.contact.state}}>
+            <input type="text" name="state" id="state" value={{user.contact.state}}>
 
             <label for="zip">Zipcode</label>
-            <input type="text" name="zip" value={{user.contact.zip}}>
+            <input type="text" name="zip" id="zip" value={{user.contact.zip}}>
 
             <label for="phoneNumber">Phone Number</label>
             <input type="tel" name="phoneNumber" id="phoneNumber">
@@ -27,7 +27,7 @@
             <input type="hidden" id="avatar-coordinates" name="avatarCoordinates">
 
         </form>
-            <input type="file" id="avatar" name="avatar" accept="image/*">
+            <input type="file" id="avatar" name="image" accept="image/*">
 
             <button class="button-submit pic-submit" type="submit" id="form-submit">Submit</button>
             <button type="button" class="button-submit" id="select-img-btn">click to change picture or drag and drop</button>

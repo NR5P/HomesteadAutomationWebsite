@@ -4,16 +4,22 @@ const imgFileElement = document.getElementById("avatar");
 const selectImageBtn = document.getElementById("select-img-btn");
 const imgToCrop = document.getElementById("croppr");
 const currentProfilePic = document.getElementById("current-profile-pic");
-const avatarCoordinates = document.getElementById("avatar-coordinates");
+//const avatarCoordinates = document.getElementById("avatar-coordinates");
 const userId = document.getElementById("userId");
 const formSubmit = document.getElementById("form-submit");
 const form = document.forms.namedItem("userProfileForm");
 let cropper;
 let canvas;
 
+const userName = document.getElementById("userName");
+const email = document.getElementById("email");
+const city = document.getElementById("city");
+const state = document.getElementById("state");
+const zip = document.getElementById("zip");
+const phoneNumber = document.getElementById("phoneNumber");
+
 
 /***************phone number formatter**************************** */
-const phoneNumber = document.getElementById("phoneNumber");
 
 
 phoneNumber.addEventListener("keyup", (e)=> {
@@ -34,7 +40,7 @@ selectImageBtn.addEventListener("click", (e) => {
     else if (selectImageBtn.innerText == "Select Cropped Region")
         getCroppedPhoto();
     else if (selectImageBtn.innerText == "Click to save") {
-        avatarCoordinates.value = cropper.getValue();
+        //avatarCoordinates.value = cropper.getValue();
         selectImageBtn.innerText = "Please press submit to update profile";
         selectImageBtn.style.color = "green";
     }
@@ -61,17 +67,29 @@ selectImageBtn.addEventListener("drop", (e) => {
 },false)
 
 formSubmit.addEventListener("click", () => {
-    console.log("submitt");
-    let formData = new FormData(form);
+    let formData = new FormData();
+    formData.append("userName", userName.value)
+    formData.append("email", email.value)
+    formData.append("city", city.value)
+    formData.append("state", state.value)
+    formData.append("zip", zip.value)
+    formData.append("phoneNumber", phoneNumber.value)
+    formData.append("userId", userId.value)
     canvas.toBlob(function(blob) {
         formData.append("image", blob, "profile.jpg");
-    })
+        fetch(`/userProfile/${userId.value}`, {
+            method: "POST",
+            body: formData
+        })
+    });
 
-    var request = new XMLHttpRequest();
-    request.open("POST", `/userProfile/${userId.value}`);
-    request.send(userProfileForm); 
-    console.log(userProfileForm)
-},false);
+    /* for testing
+    for (var x of formData.entries()) {
+        console.log(x)
+    }
+    */
+
+});
 
 
 /*
@@ -99,9 +117,9 @@ function handleCropImage() {
         aspectRatio: 1,
         startSize: [50,50, '%'],
         onCropStart: function() {
-            if (selectImageBtn.innerText = "Click to save") {
+            if (selectImageBtn.innerText == "Click to save") {
                 selectImageBtn.innerText = "Select Cropped Region";
-                selectImageBtn.style.color = "FF9D0B"; //TODO: why is this not owrking
+                selectImageBtn.style.color = "#FF9D0B"; //TODO: why is this not owrking
             }
         }
     });
@@ -138,3 +156,6 @@ function sendData() {
     return false;
 }
 */
+
+
+
