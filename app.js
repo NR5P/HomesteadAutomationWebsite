@@ -13,16 +13,11 @@ const app = express();
 // public static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-
-// load model
-require("./models/BlogPost");
-const BlogPost = mongoose.model("blogPosts");
-
-
-//load routes
+////load routes//////////////////////////////////////////////////
 const blog = require("./routes/blog");
 const users = require("./routes/users");
 const admin = require("./routes/admin");
+////////////////////////////////////////////////////////////////
 
 // Passport config
 require("./config/passport")(passport);
@@ -36,11 +31,15 @@ mongoose.connect("mongodb://localhost/homestead-web-app", {
     console.log("mongodb connected");
 })
 .catch(err => console.log(err));
+//////////////end database connection//////////////////////////
 
-// load models
+/////////////////////////load models////////////////////////////
 require("./models/User");
 const User = mongoose.model("users");
-//////////////end database connection//////////////////////////
+
+require("./models/BlogPost");
+const BlogPost = mongoose.model("blogPosts");
+////////////////////////////////////////////////////////////////
 
 
 // handlebars middleware/////////////////////////////////

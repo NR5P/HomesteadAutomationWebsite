@@ -83,12 +83,6 @@ formSubmit.addEventListener("click", () => {
         })
     });
 
-    /* for testing
-    for (var x of formData.entries()) {
-        console.log(x)
-    }
-    */
-
 });
 
 

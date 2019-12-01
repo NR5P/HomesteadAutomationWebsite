@@ -33,6 +33,10 @@ const BlogSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    authorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
     }
 });
 
