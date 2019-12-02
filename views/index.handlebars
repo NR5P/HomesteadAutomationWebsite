@@ -5,13 +5,13 @@
             <h1>{{postTitle}}</h1>
             <p>{{postBody}}</p>
         </div>
-        {{#if ../user}}
+        {{#if ../user.admin}}
             <button onclick="window.location.href = '/posts/edit/{{id}}';" class="btn-edit">Edit</button>
         {{/if}}
         <!-- delete post -->
         <form method="POST" id="delete-btn-form" action="/posts/{{id}}?_method=DELETE">
             <input type="hidden" name="_method" value="DELETE">
-            {{#if ../user}}
+            {{#if ../user.admin}}
                 <button type="submit" class="btn-delete">Delete</button>
             {{/if}}
         </form>
@@ -20,6 +20,6 @@
     <h2>No Posts</h2>
 {{/each}}
 
-{{#if user}}
+{{#if user.admin}}
     <a href="/posts/add" class="btn-add">Add Post</a>
 {{/if}}
