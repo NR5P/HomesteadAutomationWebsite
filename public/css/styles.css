@@ -59,9 +59,14 @@ form h3 {
     margin-bottom: 30px;
     font-size: 2em;
 }
+h1 {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Cinzel', serif;
+}
 
 form input {
-    width: 80%;
+    width: 100%;
     display: block;
     border: 1px solid black;
     border-radius: 2px;
@@ -128,8 +133,6 @@ form input {
     width: 100%;
 }
 
-#croppr {
-}
 .croppr-container-custom {
     width: 50%;
     margin: 0 auto;
@@ -138,6 +141,7 @@ form input {
     width: 200px;
     height: 200px;
 }
+
 
 /******************************end form**************************************************************/
 
