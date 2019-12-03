@@ -41,6 +41,7 @@ router.get("/api/:id", (req, res) => {
     BlogPost.findOne({
         _id: req.params.id
     })
+    .populate("comments.authorId")
     .then(post => {
         if (post.comments)
             res.json(post.comments);

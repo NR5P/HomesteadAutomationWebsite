@@ -16,9 +16,9 @@ window.onload = () => {
                             <div class="comment">
                                 <div class="comment-span-left">
                                     <input class="comment-id" type="hidden" value=${post._id}>
-                                    <p class="author-name">${post.authorUserName}</p>
-                                    <img class="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
-                                    <small class="member-since">${memberSince(post.authorDateJoined)}</small>
+                                    <p class="author-name">${post.authorId.userName}</p>
+                                    <img class="avatar" src=${post.authorId.avatarLink} />
+                                    <small class="member-since">${memberSince(post.authorId.dateJoined)}</small>
                                 </div>
                                 <span class="comment-span-right">
                                     <p class="post-date">${getPostDateTime(post.date)}</p>

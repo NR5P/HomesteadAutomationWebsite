@@ -4,13 +4,13 @@
         <h1>{{post.postTitle}}</h1>
         <p>{{post.postBody}}</p>
     </div>
-    {{#if user}}
+    {{#if user.admin}}
         <button onclick="window.location.href = '/posts/edit/{{user.id}}';" class="btn-edit">Edit</button>
     {{/if}}
     <!-- delete post -->
     <form method="POST" id="delete-btn-form" action="/posts/{{user.id}}?_method=DELETE">
         <input type="hidden" name="_method" value="DELETE">
-        {{#if user}}
+        {{#if user.admin}}
             <button type="submit" class="btn-delete">Delete</button>
         {{/if}}
     </form>
