@@ -147,4 +147,18 @@ router.post("/userProfile/:id", (req,res) => {
     })
 })
 
+router.post("/contact", (req,res) => {
+    const output = `
+        <p>New Contact Message</p>
+        <h3>contact details</h3>
+        <ul>
+            <li>Title: ${req.body.contactTitle}</li>
+            <li>Name: ${req.body.contactName}</li>
+            <li>Body: ${req.body.contactBody}</li>
+            <li>User Id: ${req.body.userId}</li>
+        </ul>
+    `
+    res.send(output);
+})
+
 module.exports = router;

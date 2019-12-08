@@ -1,19 +1,27 @@
 <h1>Contact</h1>
 
 <!--TODO: need to finish this contact info form and find how to send an email-->
-<form action="/posts/{{post.id}}?_method=PUT" method="post">
-    <input type="hidden" name="_method" value="PUT">
+<form action="/contact" method="post">
+    {{#if user}}
+        <input type="hidden" name="userId" value="{{user.id}}">
+    {{/if}}
+
     <div class="form-group">
-        <label for="postTitle">Title</label>
-        <input type="text" name="postTitle" value="{{post.postTitle}}" required> 
+        <label for="contactTitle">Title</label>
+        <input type="text" name="contactTitle" required> 
     </div>
 
     <div class="form-group">
-        <label for="postBody">Body</label>
-        <textarea name="postBody" required>{{post.postBody}}</textarea> 
+        <label for="contactName">Name</label>
+        <input type="text" name="contactName" required> 
     </div>
 
-    <button type="submit" class="button-submit">Edit Post</button>
+    <div class="form-group">
+        <label for="contactBody">Body</label>
+        <textarea name="contactBody" required></textarea> 
+    </div>
+
+    <button type="submit" class="button-submit">Contact</button>
 
 </form>
 
