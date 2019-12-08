@@ -171,7 +171,7 @@ form input {
     font-family: 'Cinzel', serif;
 }
 
-.card img {
+.card > img {
     width: 80%;
     margin: 0 auto;
     display: block;
@@ -243,6 +243,10 @@ button {
     font-family: 'Poppins', sans-serif;
 }
 
+.comment {
+    min-height: 120px;
+    font-size: small;
+}
 
 .comment-span-left {
     float: left;
@@ -252,6 +256,10 @@ button {
     display: inline;
     text-align: left;
 
+}
+
+.member-since {
+    display: block;
 }
 
 .post-content {
