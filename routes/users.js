@@ -135,7 +135,7 @@ router.post("/userProfile/:id", (req,res) => {
                 user.contact.zip = req.body.zip;
                 user.contact.phoneNumber = req.body.phoneNumber;
                 //user.avatarCrop = new Map(Object.entries(req.body.avatarCoordinates));
-                user.avatarLink = req.file.path;
+                user.avatarLink = "/images/" + req.file.filename;
                 console.log(req.file);
                 user.save()
                     .then(user => {

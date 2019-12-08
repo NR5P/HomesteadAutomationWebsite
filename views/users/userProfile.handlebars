@@ -1,7 +1,7 @@
 
 <div class="card">
     <div class="container">
-        <img src="" alt="" id="current-profile-pic">
+        <img src={{user.avatarLink}} alt="" id="current-profile-pic">
         <form method="POST" id="userProfileForm" name="userProfileForm" action="/userProfile/{{user._id}}" 
                onsubmit="sendData()" enctype="multipart/form-data">
             <label for="userName">User Name</label>
